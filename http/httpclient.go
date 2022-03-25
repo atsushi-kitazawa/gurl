@@ -1,8 +1,6 @@
 package http
 
 import (
-	"bytes"
-	"fmt"
 	"net/http"
 )
 
@@ -22,7 +20,7 @@ func NewRequest(method string, url string, headers map[string]string, body strin
 	}
 }
 
-func Call(req *Request) {
+func Call(req *Request) *http.Response {
 	var res *http.Response
 	var err error
 	switch req.method {
@@ -34,7 +32,6 @@ func Call(req *Request) {
 	if err != nil {
 		panic(err)
 	}
-	buf := new(bytes.Buffer)
-	buf.ReadFrom(res.Body)
-	fmt.Println(buf.String())
+
+	return res
 }

@@ -1,21 +1,18 @@
 package http
 
 import (
-	"os"
+	"fmt"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
-func httpServer() {
-
-}
-
-func TestMain(m *testing.M) {
-	code := m.Run()
-
-	os.Exit(code)
-}
-
 func TestCall(t *testing.T) {
-	req := NewRequest("GET", "http://localhost:8080", nil, "body data")
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "test")
+	}))
+	defer ts.Close()
+
+	req := NewRequest("GET", ts.URL, nil, "")
 	Call(req)
 }

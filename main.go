@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/atsushi-kitazawa/gurl/http"
+	"github.com/atsushi-kitazawa/gurl/print"
 )
 
 func main() {
@@ -23,7 +24,8 @@ func doMain() {
 	body := readKeyboard()
 
 	req := http.NewRequest(method, url, nil, body)
-	http.Call(req)
+	res := http.Call(req)
+	print.Print(res)
 }
 
 func readKeyboard() string {
