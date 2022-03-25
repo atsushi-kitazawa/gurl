@@ -2,6 +2,7 @@ package http
 
 import (
 	"net/http"
+	"strings"
 )
 
 type Request struct {
@@ -23,7 +24,7 @@ func NewRequest(method string, url string, headers map[string]string, body strin
 func Call(req *Request) *http.Response {
 	var res *http.Response
 	var err error
-	switch req.method {
+	switch strings.ToUpper(req.method) {
 	case "GET":
 		res, err = http.Get(req.url)
 	case "POST":
@@ -34,4 +35,14 @@ func Call(req *Request) *http.Response {
 	}
 
 	return res
+}
+
+func CreateHeader(headers string) map[string]string {
+	r := make(map[string]string)
+	h := strings.Split(headers, ",")
+	for _, v := range h {
+		kv := strings.Split(v, ":")
+		r[strings.Trim(kv[0], " ")] = strings.Trim(kv[1], " ")
+	}
+	return r
 }

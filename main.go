@@ -19,11 +19,11 @@ func doMain() {
 	fmt.Printf("Method : ")
 	method := readKeyboard()
 	fmt.Printf("Headers : ")
-	_ = readKeyboard()
+	headers := readKeyboard()
 	fmt.Printf("Body : ")
 	body := readKeyboard()
 
-	req := http.NewRequest(method, url, nil, body)
+	req := http.NewRequest(method, url, http.CreateHeader(headers), body)
 	res := http.Call(req)
 	print.Print(res)
 }
