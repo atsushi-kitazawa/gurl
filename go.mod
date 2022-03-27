@@ -5,6 +5,5 @@ go 1.15
 require (
 	github.com/eiannone/keyboard v0.0.0-20200508000154-caf4b762e807
 	github.com/go-playground/assert/v2 v2.0.1
-	github.com/golang-collections/collections v0.0.0-20130729185459-604e922904d3
 	golang.org/x/sys v0.0.0-20220319134239-a9b59b0215f8 // indirect
 )

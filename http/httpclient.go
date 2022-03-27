@@ -40,8 +40,14 @@ func Call(req *Request) *http.Response {
 func CreateHeader(headers string) map[string]string {
 	r := make(map[string]string)
 	h := strings.Split(headers, ",")
+	if len(h) == 1 {
+		return r
+	}
 	for _, v := range h {
 		kv := strings.Split(v, ":")
+		if len(kv) == 1 {
+			continue
+		}
 		r[strings.Trim(kv[0], " ")] = strings.Trim(kv[1], " ")
 	}
 	return r
